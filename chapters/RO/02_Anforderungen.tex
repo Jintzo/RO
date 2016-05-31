@@ -70,5 +70,81 @@
 
 \textbf{C - Spezialoperatoren}:
 \begin{items}
-  \item \underline{Auswahloperator}: \code{z = (a < b) ? a : b} (\code{z=a}, falls \code{a<b}, sonst \code{z=b})
+  \item \underline{Auswahloperator}: \code{z = (a < b) ? a : b} (\code{z=a}, falls \code{a<b}, sonst \code{z=b<})
 \end{items}
+
+\textbf{C - Operatoren-Priorität}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.33\textwidth]{Precedence}
+  \label{Precedence}
+\end{figure}
+
+\textbf{C - Kontrollstrukturen}
+\begin{items}
+  \item \code{if (Bedigung) \{ Aktionen_if \} else \{ Aktionen_else \}}
+  \item \code{switch (var) \{ case a: ... break; ... default: ... break; \}}
+  \item \code{while (Bedigung) \{ ... \}}
+  \item \code{for (init; Bedingung; reinit) \{ ... \}}
+  \item \code{do \{ ... \} while (Bedingung)}
+\end{items}
+
+\newpage
+
+\textbf{C - Programmaufbau}
+\begin{enumeration}
+  \item \underline{Präprozessor-Anweisungen}:
+  \begin{enumeration}
+    \item \code{#include <stdio.h>} (Bibliotheken einbinden)
+    \item \code{#include \"modul.h\"} (Module einbinden)
+    \item \code{#define COLOR blau} (Globale Textersetzung)
+  \end{enumeration}
+  \item \underline{Globale Deklarationen/Definitionen}:
+  \begin{enumeration}
+    \item \code{int i;} (Deklaration)
+    \item \code{int j = 13;} (Definition)
+    \item \code{int fakultaet (int n);} (Funktionsprototyp)
+  \end{enumeration}
+
+  \item \underline{Funktionen/Programmstruktur}
+  \begin{items}
+    \item \code{int fakultaet (int n) \{  ... \}}
+    \item jedes Programm enthält Funktion \code{void main(...) \{ ... \}}
+    \item Unterprogramm = Funktion
+    \item Programmstart: \code{main} wird aufgerufen
+    \item Rekursion ist zulässig
+  \end{items}
+\end{enumeration}
+
+\textbf{C - Parameterübergabe}
+\begin{enumeration}
+  \item \underline{Call by Value}: Normalfall, Kopie des Parameters wird an Funktion übergeben, bei Änderung keine Auswirkung beim Aufrufer
+  \item \underline{Call by Reference}: Mit Zeigern umsetzbar, selbe Speicheradresse wie Aufrufer
+\end{enumeration}
+
+\textbf{C - globale und lokale Variablen}
+\begin{items}
+  \item \underline{Global}: Sind gesamtem Programm bekannt (zu vermeiden)
+  \item \underline{Lokal}: Nur in Block deklariert
+\end{items}
+
+\textbf{C - Speicherklassen}
+\begin{items}
+  \item \underline{\code{auto}}: lokale Variablen
+  \item \underline{\code{register}}: wird in CPU-Register gespeichert, nur für zeitkritische Variablen zu verwenden
+  \item \underline{\code{static}}: statischer Speicherplatz
+  \item \underline{\code{extern}}: globale Variable
+\end{items}
+
+\textbf{C - Zeiger und Vektoren}
+\begin{items}
+  \item \underline{Pointer}: Enthält Adresse, die auf Daten verweist
+  \item \code{int* p} (\code{p} ist Zeiger auf \code{int})
+  \item \code{a = 3; p = &a} (\code{p} enhält Adresse von \code{a})
+  \item \code{int b = *p + 1} (\code{=4})
+\end{items}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.33\textwidth]{Pointer}
+  \label{Pointer}
+\end{figure}
