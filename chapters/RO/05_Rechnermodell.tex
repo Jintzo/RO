@@ -102,5 +102,63 @@
 	\item \underline{\textcolor{blue}{Systembus-Schnittstelle}}: Enthält Zwischenspeicherregister zur kurzfristigen Daten-/Adressaufbewahrung (Befehlszähler, Adresspuffer, Datenbuspuffer) und Ein-/Ausgangstreiber
 
 	\item \underline{Spezielle Funktionseinheiten}: Moderne Mikroprozessoren haben Speicherverwaltungseinheit (MMU), Arithmetik-Einheiten, Cache-Speicher,...
+\end{items}
 
+\newpage
+
+\textbf{Rechnermodell -- CISC}
+\begin{items}
+	\item = \emph{complex instruction set computer}
+	\item \underline{Vorteile}: Mikroprogrammierung begünstigt komplexe Befehle, komplexe Befehle $\leadsto$ kurze Programme, Unterstützung höherer Programmiersprachen durch komplexe Befehle (Abbildung Sprachkonstrukt $\to$ Befehl direkter)
+	\item \underline{Fazit}: Entwirklung von Hardware, Programmiersprachen und Einsatzgebieten begünstigt \emph{komplexe} Befehle
+	\item \underline{Nachteile}: Umfangreiche Mikroprogramme, verlängerte Entwurfszeit, komplexe Steuerwerke, nur kleine Teile des Befehlssatzes häufig benutzt, größere Fehleranfälligkeit auf Mikroprogrammebene, schwieriger Compilerbau
+	\item \underline{80/20-Regel}: Nur 20\% der Befehle werden häufig verwendet
+	\item \underline{Cycles per instruction (CPI)}: Bei meisten heutigen CISC-Architekturen: CPI <$>2$
+\end{items}
+
+\textbf{Rechnermodell -- RISC}
+\begin{items}
+	\item = \emph{reduced instruction set computer}
+	\item \underline{Grundprinzipien}:
+	\begin{enumeration}
+	 	\item Vielbenutzte Befehle so schnell wie möglich machen (keine Mikroprogrammierung, Befehlspipeline)
+	 	\item Hauptarbeit durch optimierende Compiler
+	 	\item Operanden in großen Registersätzen halten (schneller Zugriff, schnelle Verarbeitung)
+	 	\item einheitliche Befehlsformate (schnelle Decodierung)
+	 	\item viel Pipelining
+	 \end{enumeration}
+	\item \underline{Ziele}:
+	\begin{enumeration}
+		\item Jeder Befehl ein Taktzyklus
+		\item alle Befehle gleich lang
+		\item nur Load-Store und Register-Register-Befehle (wenige Adressierungsarten $\leadsto$ schnelle Ausführung)
+		\item Koprozessorarchitektur für komplexe Befehle
+	\end{enumeration}
+	\item \underline{keine Ziele}: Unterstützung von Gleitkomma-Arithmetik oder Betriebssystemfunktionen
+	\item \underline{Forderungen an RISC-Systeme}: 
+	\begin{enumeration}
+		\item Mindestens 75\% Ein-Zyklus-Befehle
+		\item Länge aller Befehle = Datenbusbreite
+		\item Nicht mehr als 128 Befehle
+		\item Nicht mehr als 4 Adressierungsarten
+		\item Load-Store-Architektur
+		\item Festverdrahtete Steuereinheit (keine Mikroprogramme)
+		\item Mindestens 32 allgemein verwendbare Register
+	\end{enumeration}
+\end{items}
+
+\textbf{RISC -- Prozessoraufbau}
+\begin{items}
+	\item \underline{Harvard-Architektur}: Programm- und Datenspeicher getrennt $\leadsto$ paralleles Holen von Operanden und Instruktionen
+	\item \underline{Varianten}:
+	\begin{enumeration}
+		\item \textbf{zwei} getrennte Bussysteme bis zu Cachespeichern, nur ein Arbeitsspeicher (niedrigere Kosten)
+		\item \textbf{ein} Bussystem (wie Standard-Mikroprozessoren)
+	\end{enumeration}
+	\item \underline{Systembusschnittstelle}: enthält Registerblocks für Daten und Adressen (parallel Lesen von Daten und Zwischenspeichern von Ergebnis)
+	\item \underline{Befehlszähler}: manchmal als Hardware-Stack ausgebildet (schnellere Unterprogrammaufrufe)
+	\item \underline{Steuerwerk}: festverdrahtet, Befehlsregister als Warteschlange (FIFO), für jede Pipeline-Stufe ein Register, Opcodes jeder Stufe können von Steuerwerk-Schaltnetz ausgewertet werden
+	\item \underline{Registersatz}: große Registeranzahl, erlaubt gleichzeitige Auswahl von 3 bis 4 Registern
+	\item \underline{Rechenwerk}: Load/Store-Architektur, Operanden via 2 Operandenbusse aus Registersatz, Ergebnis (im selben Taktzyklus) über Ergebnisbus in Registersatz, keine direkte Verbindung zwischen ALU und Systembus - Transfer über Register
+	\item \underline{Superskalarität}: Schafft RISC-Prozessor eine Befehlsausführung pro Takt, so heißt er \emph{superskalar} - pro Takt können mehrere Befehle den Ausführungseinheiten zugeordnet und so viele Befehlsausführungen beendet werden
 \end{items}
