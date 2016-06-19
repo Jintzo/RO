@@ -59,4 +59,30 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
 
 \newpage
 
-\textbf{MIPS  -- Befehlsformate}
+\textbf{MIPS  -- Befehlsabarbeitung}
+\begin{items}
+  \item \textbf{Befehl holen}: Wird bei jedem Befehlstyp benötigt
+  \begin{enumeration}
+    \item Befehl im Befehlsspeicher adressieren
+    \item Befehlszähler (\code{PC}) um \( 4 \) inkrementieren
+  \end{enumeration}
+  \begin{figure}[H]\centering\label{BefehlHolen}\includegraphics[width=0.2\textwidth]{BefehlHolen}\end{figure}
+
+  \item \textbf{Typ R}: Lesezugriff auf beide Operandenregister, Schreibzugriff auf Zielregister
+  \begin{figure}[H]\centering\label{Abarbeitung-R}\includegraphics[width=0.33\textwidth]{Abarbeitung-R}\end{figure}
+
+  \item \textbf{Typ I}: Bestimmung der Speicher-/Ladeadresse durch Addieren von 16-Bit-Offset zu Basisadresse in \( r_m \)
+  \begin{enumeration}
+    \item \underline{Laden} (z.B. \code{lw} \( r_z \)\code{, offset(}\( r_m \)\code{)}): Wort an Ladeadresse wird in \( r_z \) geladen
+    \item \underline{Speichern} (z.B. \code{sw} \( r_n \)\code{, offset(}\( r_m \)\code{)}): Wort in \( r_n \) wird in Speicheradresse gespeichert
+  \end{enumeration}
+  \begin{figure}[H]\centering\label{Abarbeitung-I}\includegraphics[width=0.33\textwidth]{Abarbeitung-I}\end{figure}
+
+  \item \textbf{Typ J}: 16-Bit Offset \( \leadsto \) bis zu \( 2^{15}-1 \) Befehle vorwärts/\( 2^{15} \) rückwärts (Basisadresse zur Sprungberechnung = Befehlsadresse hinter Verzweigungsbefehl (\code{PC+4}), z.B. \code{beq} \( r_n, r_m \)\code{, offset}: Vergleich von \( r_n \), \( r_m \) entscheidet ob Sprung genommen wird)
+  \begin{figure}[H]\centering\label{Abarbeitung-J}\includegraphics[width=0.33\textwidth]{Abarbeitung-J}\end{figure}
+
+  \newpage
+
+  \item \textbf{MIPS-Datenpfad}: Zusammenführung der drei Modelle
+  \begin{figure}[H]\centering\label{MIPS-Datenpfad}\includegraphics[width=0.33\textwidth]{MIPS-Datenpfad}\end{figure}
+\end{items}
