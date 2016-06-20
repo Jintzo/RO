@@ -84,5 +84,18 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
   \newpage
 
   \item \textbf{MIPS-Datenpfad}: Zusammenführung der drei Modelle
-  \begin{figure}[H]\centering\label{MIPS-Datenpfad}\includegraphics[width=0.33\textwidth]{MIPS-Datenpfad}\end{figure}
+  \begin{figure}[H]\centering\label{MIPS-Datenpfad}\includegraphics[width=0.5\textwidth]{MIPS-Datenpfad}\end{figure}
+\end{items}
+
+\textbf{MIPS -- Pipelining: DLX-Pipeline} (DLX = deluxe)
+\begin{items}
+  \item \textbf{Pipelinestufen, Buffering} (siehe Grafik "`Begrifflichkeiten: Stufen, Register"')
+  \begin{figure}[H]\centering\label{MIPS-Buffering}\includegraphics[width=0.5\textwidth]{MIPS-Buffering}\end{figure}
+  \begin{enumeration}
+    \item \underline{Phase 1 (\code{IF}-Phase)}: Instruction Fetch. Der durch Befehlszähler adressierte Befehl wird aus Cache/Speicher in Befehlsbuffer geladen, Befehlszähler wird inkrementiert
+    \item \underline{Phase 2 (\code{ID/RF}-Phase)}: Instruktion Decode, Register Fetch. Aus Opcode werden prozessorinterne Steuersignale erzeugt, Operanden werden aus (Universal-)Register bereitgestellt
+    \item \underline{Phase 3 (\code{EX}-Phase)}: Execution, Effective Address Calculation. Operation wird auf Operanden ausgeführt, bei Lade-/Speicherbefehl oder Verzweigung berechnet ALU effektive Adresse
+    \item \underline{Phase 4 (\code{MEM}-Phase)}: Memory access. Speicherzugriff (bei Lade-/Speicherbefehl) wird durchfeführt
+    \item \underline{Phase 5 (\code{WB}-Phase)}: Write back. Ergebnis wird in (Universal-)Register geschrieben (ergebnislose Befehle in dieser Phase passiv)
+  \end{enumeration}
 \end{items}
