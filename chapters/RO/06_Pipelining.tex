@@ -99,3 +99,104 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
     \item \underline{Phase 5 (\code{WB}-Phase)}: Write back. Ergebnis wird in (Universal-)Register geschrieben (ergebnislose Befehle in dieser Phase passiv)
   \end{enumeration}
 \end{items}
+
+\newpage
+
+\textbf{MIPS -- Pipeline-Konflikte}
+\begin{items}
+  \item \underline{Datenkonflikte}: Benötiger Operand ist in der Pipeline (noch) nicht verfügbar (Datenabhängigkeiten im Befehlsstrom)
+  \item \underline{Struktur-/Ressourcenkonflikte}: Zwei Pipeline-Stufen benötigen selbe Ressource, aber nur einfacher Zugriff möglich
+  \item \underline{Steuerflusskonflikte}: Bei Programmsteuerbefehlen
+  \begin{enumeration}
+    \item Zieladresse des nächsten Befehls in Befehlsbereitstellungsphase noch nicht berechnet
+    \item Bedingter Sprung: noch unklar, ob gesprungen werden muss
+  \end{enumeration}
+\end{items}
+
+\textbf{Datenabhängigkeiten/-konflikte}
+\begin{items}
+  \item \underline{Datenabhängigkeit}: Zwischen zwei aufeinanderfolgenden Befehlen \( Inst_1, Inst_2 \) kann eine \emph{Datenabhängigkeit} bestehen:
+  \begin{enumeration}
+    \item \textbf{Echte Datenabhängigkeit} (true dependence, \( \delta^t \)): \( Inst_1 \) schreibt Ausgabe in Register, dass die Eingabe von \( Inst_2 \) ist
+    \item \textbf{Gegenabhängigkeit} (antidependence, \( \delta^a \)): \( Inst_1 \) liest von einer Stelle, die von \( Inst_2 \) überschrieben wird
+    \item \textbf{Ausgabeabhängigkeit} (output dependence, \( \delta^o \)): \( Inst_1 \) und \( Inst_2 \) schreiben Ergebnis in selbes Register, aber \( Inst_2 \) nach \( Inst_1 \)
+  \end{enumeration}
+
+  \item \underline{Beispiel}:
+  \begin{align*}
+    S_1: \text{\code{add r1,r2,2}} &\quad \text{\code{# r1 := r2+2}} \\
+    S_2: \text{\code{add r4,r1,r3}} &\quad \text{\code{# r4 := r1+r3}} \\
+    S_3: \text{\code{mul r3,r5,3}} &\quad \text{\code{# r3 := r5*3}} \\
+    S_4: \text{\code{mul r3,r6,3}} &\quad \text{\code{# r3 := r6*3}}
+  \end{align*}
+  \begin{figure}[H]\centering\label{Datenabhaengigkeiten}\includegraphics[width=0.2\textwidth]{Datenabhaengigkeiten}\end{figure}
+
+  \item \underline{Datenkonflikte}:
+  \begin{enumeration}
+    \item \textbf{Lese-nach-Schreibe-Konflikt} (read after write, RAW): Verursacht durch echte Abhängigkeit
+    \item \textbf{Schreibe-nach-Lese-Konflikt} (write after read, WAR): Verursacht durch Gegenabhängigkeit, tritt auf, wenn Schreib- vor Lesestufe in Pipeline
+    \item \textbf{Schreibe-nach-Schreibe-Konflikt} (write after write, WAW): Verursacht durch Ausgabeabhängigkeit, tritt auf, wenn Pipeline in mehr als einer Stufe schreibt oder ein Befehl fortgesetzt werden darf, wenn vorhergehender angehalten wurde
+  \end{enumeration}
+  \item Kein WAR-/WAW-Konflikt in fünfstufiger DLX-Pipeline, da nicht überholt werden kann und immer in Stufe 2 gelesen wird (bzw. in Stufe 5 geschrieben)
+  \item \underline{Lösungen}:
+  \begin{enumeration}
+    \item \textbf{Software-Lösung}: 
+    \begin{enumeration}
+      \item Compiler erkennt Datenkonflikte, fügt nach konfliktverursachenden Befehlen Leeroperation (\code{noop}) ein
+      \item Statische Befehlsanordnung: Befehle werden umgeordnet (Optimierung), um Leeroperationen zu minimieren (Instruction Scheduling, Pipeline Scheduling)
+    \end{enumeration}
+
+    \newpage
+
+    \item \textbf{Hardware-Lösung}:
+    \begin{enumeration}
+      \item Pipeline leerlaufen lassen: Pipeline-Sperrung (\emph{interlocking}) bzw. Pipeline-Leerlauf (\emph{stalling})
+      \begin{figure}[H]\centering\label{Interlocking}\includegraphics[width=0.33\textwidth]{Interlocking}\end{figure}
+      \item \emph{Forwarding}: Wird Datenkonflikt erkannt, so wird Operand nicht aus Universalregister, sondern direkt aus ALU-Ausgaberegister der vorherigen Operation in ALU-Eingaberegister übertragen
+      \begin{figure}[H]\centering\label{Forwarding}\includegraphics[width=0.33\textwidth]{Forwarding}\end{figure}
+      \item \emph{Forwarding with interlocking}: Forwarding löst nicht alle möglichen Datenkonflikte
+      \begin{figure}[H]\centering\label{ForwardingInterlocking}\includegraphics[width=0.33\textwidth]{ForwardingInterlocking}\end{figure}
+    \end{enumeration}
+  \end{enumeration}
+\end{items}
+
+\textbf{Ressourcenkonflikte}
+\begin{items}
+  \item Treten bei einfachen Modellen wie einer DLX-Pipeline nicht auf
+  \item \underline{Lösungen}:
+  \begin{enumeration}
+    \item \textbf{Arbitrierung mit Interlocking}: Arbitrierungslogik hält konfliktverursachenden Befehl an \( \leadsto \) Verzögerung
+    \item \textbf{Übertaktung}: Konfliktverursachende Ressource wird schneller getaktet als übrige Pipeline-Stufen
+    \item \textbf{Ressourcenreplizierung}: Ressourcen werden vervielfacht (z.B. Registersatz mit mehreren Schreibkanälen) 
+  \end{enumeration}
+\end{items}
+
+\newpage
+
+\textbf{Steuerflusskonflikte}
+\begin{items}
+  \item \underline{Programmsteuerbefehle}: bedingte und unbedingte Sprünge, Unterprogrammaufruf- und -rückkehrbefehle, Unterbrechungsbefehle
+  \item Befehlszähler wird erst in \code{MEM}-Stufe ersetzt \( \leadsto \) Befehle in Pipeline, die wieder gelöscht werden müssen
+  \begin{figure}[H]\centering\label{Steuerflusskonflikt}\includegraphics[width=0.33\textwidth]{Steuerflusskonflikt}\end{figure}
+  \item \( \leadsto \) nach genommenem Sprung müssen Wartezyklen eingefügt werden (die ggf. durch Umstrukturierung der Pipeline verringert werden können)
+  \begin{figure}[H]\centering\label{Pipeline-Wartezyklen}\includegraphics[width=0.33\textwidth]{Pipeline-Wartezyklen}\end{figure}
+
+  \item \underline{Lösungen}:
+  \begin{enumeration}
+    \item \textbf{Software-Lösung}:
+    \begin{enumeration}
+      \item Einfügen von \code{noop} in die Wartezyklen
+      \item Statische Befehlsanordnung: Compiler optimiert Code und fügt nicht sprungrelevante Befehle in Wartezyklen ein, \code{noop}, falls es keine gibt \( \leadsto \) Code Pipeline-abhängig
+    \end{enumeration}
+    \item \textbf{Hardware-Lösung}:
+    \begin{enumeration}
+      \item Hardware Erkennt Verzweigungsbefehle in ID-Stufe und lädt danach bis zur Berechnung der Zieladresse keine weiteren Befehle \( \leadsto \) bereits in \code{IF}-Stufe geladener Befehl muss gelöscht werden
+      \item Spekulation auf nicht genommene bedingte Sprünge - wird Sprung doch genommen Pipeline leeren (\emph{Pipeline flushing})
+      \item 1-Bit-Prädikator zur Sprungvorhersage
+      \begin{figure}[H]\centering\label{1-Bit-Praediktor}\includegraphics[width=0.33\textwidth]{1-Bit-Praediktor}\end{figure}
+      \item 2-Bit-Prädiktor zur Sprungvorhersage
+      \begin{figure}[H]\centering\label{2-Bit-Praediktor}\includegraphics[width=0.33\textwidth]{2-Bit-Praediktor}\end{figure}
+      \item Moderne Sprungvorhersagetechniken: In mehr als \( 90\% \) der Fälle richtig
+    \end{enumeration}
+  \end{enumeration}
+\end{items}
