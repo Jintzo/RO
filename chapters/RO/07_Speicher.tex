@@ -50,7 +50,7 @@
 \textbf{Speicherzelle -- dynamisch (DRAM)}:
 \begin{items}
 	\item Aufgebaut aus einer Transistorzelle und einem Kondensator (vergößerte Drain-Zone, von Drain-Kontakt durch dünne Isolierschicht getrennt) \( \leadsto \) Platzverbrauch viermal kleiner als bei SRAM
-	\item \underline{Vorteile}: Geriner Platzverbrauch
+	\item \underline{Vorteile}: Geringer Platzverbrauch
 	\item \underline{Nachteile}: Information geht beim Lesen verloren und muss neu gespeichert werden (\emph{destructive read}), Ladung geht nach einiger Zeit durch Leckströme verloren \( \leadsto \) periodische Auffrischung (\emph{refresh}) nötig
 	\item \underline{Lesen}:
 	\begin{enumeration}
@@ -66,3 +66,91 @@
 	\end{enumeration}
 \end{items}
 \begin{figure}[H]\centering\label{AufbauDRAM}\includegraphics[width=0.5\textwidth]{AufbauDRAM}\end{figure}
+
+\newpage
+
+\textbf{DRAM -- Adressierung}
+\begin{figure}[H]\centering\label{DRAMAdressierung}\includegraphics[width=0.33\textwidth]{DRAMAdressierung}\end{figure}
+
+\textbf{DRAM -- Auffrischung}
+\begin{items}
+	\item Zeilenweise, jede Zeile alle 2 msec
+	\item Nur Zeilenadresse wird an Baustein angelegt, RAS=0, CAS=1
+\end{items}
+
+\textbf{Zugriffsbeschleunigung -- Techniken}
+\begin{items}
+	\item \underline{Prinzip}: Übertragung von benachbarten Bytes (Blöcken) anstatt einzelnen Bytes \\*
+		\( \leadsto \) \textbf{beschleunigter Zugriff} auf Speicherbaustein, falls alle zu \\* \phantom{\( \leadsto \)} lesenden/schreibenden Speicherzellen in einer Zeile liegen \\*
+		Zeilenadresse wird auch bei wiederholtem Zugriff auf Zeile (auch \emph{page} genannt) nur einmal angelegt (und im Register gespeichert). Dann werden in schneller Folge die Spaltenadressen angelegt (\emph{fast page mode}: \textbf{FPM-DRAM}) \\*
+		\( \leadsto \) \textbf{erheblich beschleunigter Zugriff}
+\end{items}
+
+\textbf{FPM-DRAM}
+\begin{items}
+	\item aufeinanderfolgende Speicherzugriffe oft in selber Zeile \\*
+		 \( \leadsto \) ausnutzen
+	\item \underline{Initialisieren}: Wie normaler DRAM
+	\item \underline{Nach 1. Lesezyklus}: Speichersteuerung RAS-Signal bleibt aktiv \\*
+		\( \leadsto \) Zeile bleibt aktiv
+	\item \underline{Bei folgenden Lesezugriffen}: Speichersteuerung übergibt nur noch jeweils eine neue Spaltenadresse an DRAM
+	\item \( \leadsto \) RAS-precharche-Zeit und RAS-CAS-Delay entfallen bei Folgezugriffen
+\end{items}
+
+\textbf{EDO-RAM}
+\begin{items}
+	\item = \emph{extended data output} RAM
+	\item Datenausgabe wird bei Lesen von CAS-Signal durch \textbf{interne Pufferung} entkoppelt
+	\item \( \leadsto \) Daten stehen länger am Ausgang bereit
+	\item \( \leadsto \) bessere Verschachtelungsmöglichkeiten beim Lesen
+	\item Prozessor kann Daten auslesen, während Speichersteuerung neue Spaltenadresse an DRAM übergibt
+\end{items}
+
+\textbf{SDRAM}
+\begin{items}
+	\item = \emph{synchrone dynamische} RAMs
+	\item beherrscht heute Speichermarkt
+	\item Alle Ein-/Ausgangssignale synchron zum Systemtakt
+	\item Prozessor, Chipsatz, Speicher kommunizieren über ein Bussystem (mit einer Frequenz getaktet)
+	\item Intern 2 bis 4 Speicherbänke
+	\item Nach Anlegen von Zeilen-/Spaltenadresse:
+	\begin{enumeration}
+		\item Speichersteuerung generiert nachfolgende Adressen
+		\item Speichersteuerung führt alternierenden, überlappenden Zugriff auf die Speicherbänke aus
+	\end{enumeration}
+\end{items}
+
+\textbf{DDR-SDRAM}
+\begin{items}
+	\item Nächste Stufe SDRAM (SRAM II)
+	\item Vier Speicherbänke, die parallel arbeiten
+	\item \underline{Prinzip}: \\*
+	 	- Bandbreitenerweiterung durch Nutzung beider Taktflanken \\*
+	 	- Daten werden bei steigender + fallender Taktflanke übertragen \\*
+	 	\( \leadsto \) doppelter Datendurchsatz
+	\item Laufzeitverzögerungen sehr kritisch \\*
+		\( \leadsto \) Verwendung von bidirektionalem Strobe-Signal (\textbf{DQS}) zusätzlich zu Systemtakt
+\end{items}
+
+\textbf{SLDRAM}
+\begin{items}
+	\item = \emph{sync link} SDRAM
+	\item Weiterentwicklung SDRAM
+	\item Höhere erlaubte Busfrequenzen \( \leadsto \) höhere Leistung
+\end{items}
+
+\textbf{Organisation -- Hauptspeicher}
+\begin{items}
+	\item lineare Liste von Speicherworten
+	\item \underline{Aufbau}: Speicherbausteine
+	\item \underline{Zugriffszeit}: Abhängig von verwendeten Speicherbausteinen
+	\item Breite: IdR Breite des Datenbus
+	\item Maximale Kapazität: Gegeben durch Breite des Adressbus
+\end{items}
+
+\textbf{Memory Map}
+\begin{items}
+	\item = Speicher-Belegungsplan
+	\item Gibt an, welche Speicherbausteine auf welchen Bereichen des Hauptspeichers liegen
+\end{items}
+\begin{figure}[H]\centering\label{MemoryMap}\includegraphics[width=0.33\textwidth]{MemoryMap}\end{figure}
