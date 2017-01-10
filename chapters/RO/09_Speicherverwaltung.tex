@@ -1,0 +1,44 @@
+\section{Virtuelle Speicherverwaltung}
+
+\textbf{Notwendigkeit}
+\begin{items}
+  \item Immer größere Programme
+  \item Immer mehr Programme "`gleichzeitig"'
+  \item \( \leadsto \) verfügbarer Arbeitsspeicher schnell zu klein
+  \item \underline{Lösung}: Nur gerade benötigte Teile der aktiven Programme im Arbeitsspeicher, Rest bei Bedarf aus Hintergrundspeicher nachladen (\emph{swapping}, \emph{paging})
+  \item \underline{Umsetzung}: \textbf{MMU} (\emph{memory management unit}) setzt virtuelle Adressen in physikalische um
+\end{items}
+
+\textbf{Virtueller Speicher}
+\begin{items}
+  \item Speicherkapazität größer als effektive Hauptspeicherkapazität
+  \item Betriebssystem lagert nach Bedarf Speicherbereiche ein/aus
+  \item MMU-Adressberechnung hardwaremäßig eindeutig
+  \item Abbildungsinformation in Übersetzungstabellen gespeichert
+  \item \( \leadsto \) Abbildungsinformation für zusammenhängende Adressbereiche, um Übersetzungstabellen klein zu halten
+\end{items}
+
+\textbf{Virtueller Speicher -- Verwaltung (Segmentierung)}
+\begin{items}
+  \item Virtueller Adressraum wird in Segmente verschiedener Länge zerteilt
+  \item Mehrere Segmente pro Programm (zB für Programmcode, Daten)
+  \item Segmente enthalten logisch zusammenhängende Informationen, relativ groß
+  \item \underline{Vorteile}: \\*
+    - spiegelt logische Programmstruktur wieder \\*
+    - große Segmente \( \leadsto \) relativ seltener Datentransfer
+  \item \underline{Nachteile}: \\*
+    - Datentransfer umfangreich falls notwendig \\*
+    - Programm aus nur einem Code- und Datensegment \\* \phantom{-} \( \leadsto \) muss vollständig eingelagert werden
+\end{items}
+
+\textbf{Virtueller Speicher -- Verwaltung (Seiten)}
+\begin{items}
+  \item logischer und physikalischer Adressraum in Teile fester länge (Pages) zerteilt
+  \item Pages relativ klein (256-4k Byte)
+  \item Viele Seiten pro Prozess, keine logischen Zusammenhänge
+  \item \underline{Vorteile}: \\*
+    - kleine Seiten \( \leadsto \) nur wirklich benötigter \\* \phantom{-} Programmteil wird eingelagert \\*
+    - geringerer Verwaltungsaufwand als Segmentierung
+  \item \underline{Nachteile}: \\*
+    - häufigerer Datentransfer als bei Segmentierung
+\end{items}
