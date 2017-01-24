@@ -153,5 +153,51 @@
     - physikalische Adressen: 20 Bit \\*
     - max. adressierbare Hauptspeicherkapazität: 1 MB \\*
     - max. Segmentlänge: 64 KB \\*
-    - Abbildung virtueller Adressraum (mehrere TB) auf \\* \phantom{-} physikalischen Adressraum (4 GB)
+    - Abbildung virtueller Adressraum (mehrere TB) auf \\* \phantom{-} physikalischen Adressraum (4 GB) \\*
+    - Segment-Selektor spezifiziert nicht Basisadresse des Segments, sondern verweist auf Segment-Deskriptor in Segment-Deskriptor-Tabelle
+  \item \underline{Protected (Virtual Address) Mode}: \\*
+    - vergrößerter Adressraum mit erweiterten Speicherschutz- \\* \phantom{-} funktionen, Multitasking
+  \item \underline{Seitenorientierte Speicherverwaltung}: \\*
+    - existiert zur Kompatibilität mit 80386
+\end{items}
+
+\textbf{Fehlererkennung}
+\begin{items}
+  \item \underline{Segmentfehler}: Bit in Segment-Deskriptor zeigt, ob Segment in Hauptspeicher ist oder nicht
+  \item \underline{Seitenfehler}: Seite/Seitentabelle befindet sich nicht in Hauptspeicher \( \leadsto \) spezielles Kennungsbit in Seitentabellen-Verzeichnis
+\end{items}
+
+\textbf{Beschleunigung der Adressberechnung}
+\begin{items}
+  \item schneller, vollassoziativer Cache (\emph{translation lookaside buffer}, TBL) speichert automatisch zuletzt benutzte Einträge aus Seitentabellenverzeichnis und Seitentabelle \\*
+  \( \leadsto \) im Trefferfall (ca. 90\%) muss \textbf{nicht} auf im Hauptspeicher liegende Seitentabelle zugegriffen werden
+\end{items}
+
+\textbf{Schutzmechanismen}
+\begin{items}
+  \item Schutz vor unerlaubten Speicherzugriffen: \\*
+    - Trennung von Systemsoftware von Anwendungsprozessen \\*
+    - Trennung der Anwendungsprozesse voneinander
+\end{items}
+
+\textbf{Schutzebenen}
+\begin{items}
+  \item = \emph{privilege level} (PL)
+  \item wichtiges Mittel zur Realisierung von Schutzmechanismen
+  \item Varianten:
+  \begin{enumeration}
+    \item zwei Schutzebenen (bei x86-Seitenverwaltung): \\*
+      - \textbf{OS-Modus} (\emph{supervisor mode}) \\*
+      - \textbf{Benutzermodus} (\emph{user mode}) \\*
+      - Auftrag in Benutzermodus darf keine Daten des \\* \phantom{-} OS-Modus benutzen
+    \item vier Schutzebenen (Segmentverwaltung): \\*
+      - \code{PL0} (am vertrauenswürdigsten) bis \code{PL3}
+  \end{enumeration}
+\end{items}
+
+\textbf{Zugriffsschutz -- Regeln}
+\begin{items}
+  \item Prozess darf nur auf Daten zugreifen, die höchstens so vertrauenswürdig sind wie er selbst
+  \item Prozess darf nur Code benutzen, der mindestens so vertrauenswürdig ist wie er selbst
+  \item Zugriffsrechte ermöglicht, dass nur unter bestimmten Voraussetzungen auf Informationen zugegriffen werden darf
 \end{items}
