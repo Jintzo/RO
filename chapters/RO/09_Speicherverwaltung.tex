@@ -42,3 +42,75 @@
   \item \underline{Nachteile}: \\*
     - häufigerer Datentransfer als bei Segmentierung
 \end{items}
+
+\textbf{Segmentbasierte Speicherverwaltung -- Implementierung}
+\begin{items}
+  \item virtuelle Adresse wird in \textbf{Segmentnummer} (\( n \) höherwertigste Bits der virtuellen Adresse) als Segmentkennung und in \textbf{Bytenummer} (verbleibende \( m \) Bits der virtuellen Adresse) als Abstand zum Segmentanfang unterteilt
+  \item max. virtuelle Segmentanzahl \( 2^n \), max. Segmentgröße \( 2^m \)
+  \item Adressabbilung über Segmenttabelle (im MMU-Registerspeicher)
+  \item reale Adresse = Segmentbasisadresse + virtuelle Byte-Nummer
+  \item Segmentlängenangaben um segmentüberschreitende Zugriffe feststellen/verhindern zu können
+  \item Verschnitt: ungenutzter Raum bei Segmenten kleiner als \( 2^m \)
+  \item \( \leadsto \) gute Hauptspeicherausnutzung, wenn Segmentgrenzen an jeder Byteadresse zulässig sind
+  \item Realität: Segmentgrenzen an Vielfachen von Blöcken (hier 256 Bytes)
+  \item Segmente im virtuellen physikalischen Adressraum in 256-Byte-Blöcke unterteilt
+  \item \( \leadsto \) \( m \)-Bit-Bytenummer wird aufgeteilt in kürzere Bytenummer für Byteadressierung in Block und Blocknummer
+  \item Adressumsetzung: virtuelle Segmentnummer wird auf reale 24-Bit-Blocknummer als Segmentbasis abgebildet
+  \item Virtuelle Bytenummer für Adressierung innerhalb des Blocks wird unverändert übernommen
+\end{items}
+
+\newpage
+
+\textbf{Virtuelle Speicherverwaltung -- Probleme}
+\begin{items}
+  \item \underline{Einlagerungszeitpunkt}: Wann werden Segmente/Seiten in Hauptspeicher eingelagert?
+  \item \underline{Zuweisungsproblem}: Wo in Hauptspeicher werden Seiten/Segmente eingelagert?
+  \item \underline{Ersetzungsproblem}: Welche Segmente/Seiten auslagern um Platz für neu benötigte Daten zu schaffen?
+\end{items}
+
+\textbf{Probleme -- Einlagerungszeitpunkt}
+\begin{items}
+  \item \underline{Gängiges Verwahren}: Einlagerung auf Anforderung (\emph{demand paging} bei Seitenverfahren)
+  \item Daten werden eingelagert, sobald auf sie zugegriffen wird, aber nicht in Hauptspeicher liegen
+  \item \underline{Segment-/Seitenfehler} (\emph{segment/page fault}): Zugriff auf nicht in Hauptspeicher vorhandene(s) Segment/Seite
+\end{items}
+
+\textbf{Probleme -- Zuweisungsproblem (Segmentierung)}
+\begin{items}
+  \item ausreichend große Lücke in Hauptspeicher muss gefunden werden
+  \item Strategien:
+  \begin{enumeration}
+    \item \textbf{first-fit}: erste passende Lücke wird genommen
+    \item \textbf{best-fit}: kleinste passende Lücke wird genommen
+    \item \textbf{worst-fit}: größte passende Lücke wird genommen
+  \end{enumeration}
+  \item \underline{Problem}: Speicher zerfällt in belegte und unbelegte Speicherbereiche \\*
+    \( \leadsto \) \textbf{externe Fragmentierung}
+  \item unbelegte Speicherbereiche oft zu klein um weitere Segmente aufnehmen zu können
+\end{items}
+
+\textbf{Probleme -- Zuweisungsproblem (Seiten)}
+\begin{items}
+  \item Problem taucht nicht auf, da alle Seiten gleich groß \\*
+    \( \leadsto \) es entstehen immer passende Lücken \\*
+    \( \leadsto \) \textbf{keine externe Fragmentierung}
+  \item \underline{Interne Fragmentierung}: Einheitliche Seitengröße \( \leadsto \) auf letzter Seite des Programm-Moduls wahrscheinlich ungenutzter Leerraum
+\end{items}
+
+\textbf{Probleme -- Ersetzungsproblem (Segmentierung)}
+\begin{items}
+  \item Limitierung der Anzahl gleichzeitig von einem Prozess benutzbaren Segmente
+  \item \( \leadsto \) bei Einlagerung eines neuen Segments wird anderes Segment des Prozesses ausgelagert
+\end{items}
+
+\textbf{Probleme -- Ersetzungsproblem (Seiten)}
+\begin{items}
+  \item Seitenersetzungsstrategien:
+  \begin{enumeration}
+    \item \textbf{FIFO} (\emph{first in first out}): älteste Seite wird ersetzt
+    \item \textbf{LIFO} (\emph{last in first out}): jüngste Seite wird ersetzt
+    \item \textbf{LRU} (\emph{last recently used}): am längsten unbenutzte Seite wird ersetzt
+    \item \textbf{LFU} (\emph{least frequently used}): am seltensten benutzte Seite wird ersetzt
+    \item \textbf{LRD} (\emph{least reference density}): Seite mit geringster Zugriffsdichte wird ersetzt
+  \end{enumeration}
+\end{items}
