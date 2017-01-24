@@ -114,3 +114,44 @@
     \item \textbf{LRD} (\emph{least reference density}): Seite mit geringster Zugriffsdichte wird ersetzt
   \end{enumeration}
 \end{items}
+
+\textbf{Virtueller vs. physikalischer Cache}
+\begin{items}
+  \item \underline{virtueller Cache}: zwischen CPU und MMU, Tags = höherwertigste Bits der logischen Adressen
+  \item Vorteile: \\*
+    - bei Treffer keine MMU nötig
+  \item \underline{physikalischer Cache}: zwischen MMU und Speicher, Tags = höherwertigste Bits der physikalischen Adressen
+  \item Vorteile: \\*
+    - kleinerer Tag, da physikalische Adresse idR viel kleiner als \\* \phantom{-} logische Adresse ist \\*
+\end{items}
+
+\textbf{Segmentorientierte Speicherverwaltung -- Beispiel x86}
+\begin{items}
+  \item \underline{Segment-Deskriptor}: beschreibt sein Segment durch Attribute: \\*
+    - \textbf{Segment-Basisadresse} (\emph{base address}) \\*
+    - \textbf{Segment-Größe} (\emph{limit}) in Bytes \\*
+    - \textbf{Zugriffsrechte} (\emph{access rights}) auf das Segment
+  \item Speicherwort wird durch \textbf{Segment-Selektor} (kennzeichnet Segmentanfang) und \textbf{Offset} innerhalb des Segments adressiert
+  \item Segment-Selektoren wechseln selten, da durch Lokalitätseigenschaften von Programmen nicht bei jedem Hauptspeicherzugriff neues Segment benutzt wird
+  \item Segment-Selektoren in \textbf{Segment-Registern} gespeichert (wegen Geschwindigkeit)
+  \item Segment-Register: \\*
+    - \textbf{Code-Segment} (\code{CS}) \\*
+    - \textbf{Stack-Segment} (\code{SS}) \\*
+    - \textbf{Daten-Segment} (\code{DS}) \\*
+    - \textbf{Extra-Segment} (\code{ES}, \code{FS}, \code{GS},...) \\*
+    \( \leadsto \) Speicherwortadressierung durch Segment-Register + Offset
+  \item Segment-Deskriptor-Cache: Speichert wichtige Informationen über ausgewähltes Segment \\*
+    \( \leadsto \) keine Speicherzugriffe beim Lesen von Segmenteigenschaften
+  \item Jedes Segment mit Anfangsadresse im Segmentregister ist physikalisch im Hauptspeicher
+  \item \textbf{Arbeitsmenge} (\emph{working set}): durch Segmentregister spezifizierte Segmente eines Prozesses
+\end{items}
+
+\textbf{Adressierungsmodi -- Beispiel x86}
+\begin{items}
+  \item Verschiedene Adressierungsmodi möglich (für Kompatibilität)
+  \item \underline{Real (Address) Mode} (Kompatibilitätsmode zu 8086): \\*
+    - physikalische Adressen: 20 Bit \\*
+    - max. adressierbare Hauptspeicherkapazität: 1 MB \\*
+    - max. Segmentlänge: 64 KB \\*
+    - Abbildung virtueller Adressraum (mehrere TB) auf \\* \phantom{-} physikalischen Adressraum (4 GB)
+\end{items}
