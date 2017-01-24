@@ -125,6 +125,8 @@
     - kleinerer Tag, da physikalische Adresse idR viel kleiner als \\* \phantom{-} logische Adresse ist \\*
 \end{items}
 
+\newpage
+
 \textbf{Segmentorientierte Speicherverwaltung -- Beispiel x86}
 \begin{items}
   \item \underline{Segment-Deskriptor}: beschreibt sein Segment durch Attribute: \\*
@@ -134,11 +136,7 @@
   \item Speicherwort wird durch \textbf{Segment-Selektor} (kennzeichnet Segmentanfang) und \textbf{Offset} innerhalb des Segments adressiert
   \item Segment-Selektoren wechseln selten, da durch Lokalitätseigenschaften von Programmen nicht bei jedem Hauptspeicherzugriff neues Segment benutzt wird
   \item Segment-Selektoren in \textbf{Segment-Registern} gespeichert (wegen Geschwindigkeit)
-  \item Segment-Register: \\*
-    - \textbf{Code-Segment} (\code{CS}) \\*
-    - \textbf{Stack-Segment} (\code{SS}) \\*
-    - \textbf{Daten-Segment} (\code{DS}) \\*
-    - \textbf{Extra-Segment} (\code{ES}, \code{FS}, \code{GS},...) \\*
+  \item Segment-Register: \textbf{Code-Segment} (\code{CS}), \textbf{Stack-Segment} (\code{SS}), \textbf{Daten-Segment} (\code{DS}), \textbf{Extra-Segment} (\code{ES}, \code{FS}, \code{GS},...) \\*
     \( \leadsto \) Speicherwortadressierung durch Segment-Register + Offset
   \item Segment-Deskriptor-Cache: Speichert wichtige Informationen über ausgewähltes Segment \\*
     \( \leadsto \) keine Speicherzugriffe beim Lesen von Segmenteigenschaften
