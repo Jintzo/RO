@@ -1,14 +1,14 @@
 \section{Rechnermodell}
 \label{sec:rechnermodell}
 
-\textbf{Rechnermodell -- von-Neumann-Rechner}
-\begin{figure}[ht]
+\paragraph{Rechnermodell --- von-Neumann-Rechner}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.33\textwidth]{VonNeumann}
-  \label{VonNeumann}
+ \label{VonNeumann}
 \end{figure}
 
-\textbf{Von-Neumann-Rechner -- Komponenten}
+\paragraph{Von-Neumann-Rechner --- Komponenten}
 \begin{items}
 	\item \underline{Zentraleinheit}: Verarbeitet Daten gemäß eines Programms
 	\begin{enumeration}
@@ -27,8 +27,8 @@
 
 \newpage
 
-\textbf{Rechnermodell -- einfacher Mikroprozessor}
-\begin{figure}[ht]
+\paragraph{Rechnermodell --- einfacher Mikroprozessor}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.33\textwidth]{Mikroprozessor}
   \label{Mikroprozessor}
@@ -81,7 +81,7 @@
 		\item \textbf{Registerskalierung}: Je nach aktueller Datenlänge (1 Byte, 2 Byte,...) wird Indexregister vor Auswertung mit 1,2,... multipliziert (Vorteil: bessere Registerbreitenausnutzung, da Register nur um 1 de-/inkrementiert werden muss)
 		\item \textbf{Laufzeitstack}: LIFP-Speicher im Hauptspeicher, speichert Prozessorstatus und Programmzähler bei Unterprogrammaufruf/Unterbrechungsroutinen, Parameterübergabe, kurzzeitige Datenlagerung bei Ausführung, Datenübertragungsbefehle \code{PUSH} und \code{POP/PULL}
 	\end{enumeration}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{Registersatz}
 	  \label{Registersatz}
@@ -106,7 +106,7 @@
 
 \newpage
 
-\textbf{Rechnermodell -- CISC}
+\paragraph{Rechnermodell --- CISC}
 \begin{items}
 	\item = \emph{complex instruction set computer}
 	\item \underline{Vorteile}: Mikroprogrammierung begünstigt komplexe Befehle, komplexe Befehle $\leadsto$ kurze Programme, Unterstützung höherer Programmiersprachen durch komplexe Befehle (Abbildung Sprachkonstrukt $\to$ Befehl direkter)
@@ -116,7 +116,7 @@
 	\item \underline{Cycles per instruction (CPI)}: Bei meisten heutigen CISC-Architekturen: CPI <$>2$
 \end{items}
 
-\textbf{Rechnermodell -- RISC}
+\paragraph{Rechnermodell --- RISC}
 \begin{items}
 	\item = \emph{reduced instruction set computer}
 	\item \underline{Grundprinzipien}:
@@ -147,7 +147,7 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{RISC -- Prozessoraufbau}
+\paragraph{RISC --- Prozessoraufbau}
 \begin{items}
 	\item \underline{Harvard-Architektur}: Programm- und Datenspeicher getrennt $\leadsto$ paralleles Holen von Operanden und Instruktionen
 	\item \underline{Varianten}:

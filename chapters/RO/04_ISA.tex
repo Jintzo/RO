@@ -1,13 +1,13 @@
 \section{Befehlssatzarchitektur}
 \label{sec:befehlssatzarchitektur}
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.33\textwidth]{ISA}
   \label{ISA}
 \end{figure}
 
-\textbf{ISA -- Aufgaben}
+\paragraph{ISA --- Aufgaben}
 \begin{items}
 	\item Wie werden Daten repräsentiert?
 	\item Wo werden Daten gespeichert?
@@ -17,14 +17,14 @@
 	\item $\leadsto$ abstrahiert Hardware für den Maschinenprogrammierer
 \end{items}
 
-\textbf{Ausführungsmodelle}
-\begin{figure}[ht]
+\paragraph{Ausführungsmodelle}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.33\textwidth]{Ausfuehrungsmodelle}
   \label{Ausfuehrungsmodelle}
 \end{figure}
 
-\textbf{Ausführungsmodell -- Register-Register}
+\paragraph{Ausführungsmodell --- Register-Register}
 \begin{items}
 	\item Alle Operanden und Ergebnis stehen in Allzweckregistern
 	\item \underline{Load/Store}: Bestimmte Befehle holen Operanden aus Hauptspeicher, schreiben Inhalte von Registern in Speicher
@@ -39,7 +39,7 @@
 	\item \underline{Nachteile}: Höhere Anzahl von Befehlen im Vergleich zu Architekturen mit Speicherreferenzen, längere Programme
 \end{items}
 
-\textbf{Ausführungsmodell -- Register-Speicher}
+\paragraph{Ausführungsmodell --- Register-Speicher}
 \begin{items}
 	\item Ein Operand im Speicher, ein Operand im Register, Ergebnis in Speicher oder Register
 	\item Explizite Adressierung mit/ohne Überdeckung
@@ -54,7 +54,7 @@
 
 \newpage
 
-\textbf{Ausführungsmodell -- Akkumulator-Register}
+\paragraph{Ausführungsmodell --- Akkumulator-Register}
 \begin{items}
 	\item \underline{Akkumulator}: Ausgezeichnetes Register, dient als Quelle eines Operanden und als Ziel für das Resultat (zweistellige Operationen)
 	\item Implizite und überdeckte Adressierung
@@ -67,7 +67,7 @@
 	\end{align*}
 \end{items}
 
-\textbf{Ausführungsmodell -- Keller}
+\paragraph{Ausführungsmodell --- Keller}
 \begin{items}
 	\item Operanden einer zweistelligen Operation stehen auf den obersten zwei Kellerelementen
 	\item Ergebnis wird auf Keller abgelegt
@@ -79,20 +79,20 @@
 	\end{align*}
 \end{items}
 
-\textbf{Ausführungsmodelle -- Übersicht} \\
+\paragraph{Ausführungsmodelle --- Übersicht}
 \begin{items}
 	\item 
 	\begin{center}
 		\code{C=A+B; D=C-B}
 	\end{center}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{UebersichtISA}
 	  \label{UebersichtISA}
 	\end{figure}
 \end{items}
 
-\textbf{Architektur -- Datentypen}
+\paragraph{Architektur --- Datentypen}
 \begin{items}
 	\item = Datenformat + inhaltliche Interpretation
 	\item Alternative: Datentyparchitektur (Daten führen Typinformation mit sich)
@@ -105,33 +105,33 @@
 		\item Doppelwort: 64 Bit
 	\end{enumeration}
 	\item \underline{Vorzeichenlose Dualzahl}:
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{DualzahlVorzeichenlos}
 	  \label{DualzahlVorzeichenlos}
 	\end{figure}
 	\item \underline{2er-Komplement} (signed Integer):
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{ZweierKomplement}
 	  \label{ZweierKomplement}
 	\end{figure}
 	\newpage
 	\item \underline{BCD (gepackt)}: ein Halbbyte codiert eine Zahl
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{BCDPacked}
 	  \label{BCDPacked}
 	\end{figure}
 	\item \underline{BCD (ungepackt)}: ein Byte codiert eine Zahl
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{BCDUnpacked}
 	  \label{BCDUnpacked}
 	\end{figure}
 	\item \underline{Gleitkommazahlen}: Siehe IEEE-Standard oben
 	\item \underline{Bitfeld}: Darstellung/Verarbeitung von Bitvektoren, vorzeichenlosen Dualzahlen, Zweierkomplementzahlen - Darstellung durch Byte-Adresse und Bitfeld-Offset
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{Bitfeld}
 	  \label{Bitfeld}
@@ -139,13 +139,13 @@
 	\item \underline{String}: Aufeinanderfolgend gespeicherte Bytes, enthalten meist ASCII-Zeichen
 \end{items}
 
-\textbf{Speicheradressierung -- Datenzugriff}
+\paragraph{Speicheradressierung --- Datenzugriff}
 \begin{enumeration}
 	\item \underline{Byte-adressierbarer Speicher}: Jedes Byte ist über eine bestimmte Adresse adressierbar
 	\item \underline{Wort-organisierter Speicher}: Zugriffsbreite = Datenbusbreite (32/64/... Bit)
 \end{enumeration}
 
-\textbf{Speicheradressierung -- Alignment}
+\paragraph{Speicheradressierung --- Alignment}
 \begin{items}
 	\item \underline{Data Alignment}: Datum ($s$ Bytes) ist ausgerichtet abgelegt $\Leftrightarrow$ seine Adresse $A$ ist derart, dass $A \text{ mod } s = 0$
 	\item \underline{Data Misalignment}: Daten an beliebiegen Adressen gespeichert
@@ -157,14 +157,14 @@
 	\item \underline{Big Endian}: Niegrigstwertigstes Byte an der höchsten Adresse
 \end{items}
 
-\textbf{Speicheradressierung -- Adressierungsarten}
+\paragraph{Speicheradressierung --- Adressierungsarten}
 \begin{enumeration}
 	\item \underline{Programmadresse}: Im Programm vorliegende Adressen (Prozessor erzeugt aus Programmadressen Prozessadressen mittels Indexmodifikation/Substitution/relativer Adressierung/offener Basisadressierung)
 	\item \underline{Prozessadresse} (effektive Adresse): Vom Prozessor verwendet (Prozessor erzeugt nach OS-Angaben aus Prozessadressen Maschinenadressen mittels verdeckter Basisadressierung/Seitenadressierung) - Grund: beliebige Lage des Programms und seiner Werte, partielle Lagerung im Speicher 
 	\item \underline{Maschinenadresse}: Vom Prozessor gegenüber Hauptspeicher verwendet
 \end{enumeration}
 
-\textbf{Instruction Set}
+\paragraph{Instruction Set}
 \begin{items}
 	\item legt Grundoperationen eines Prozessors fest
 	\item Befehlsarten:
@@ -180,7 +180,7 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{Instruction Set -- Formate}
+\paragraph{Instruction Set --- Formate}
 \begin{items}
 	\item \underline{Befehlsformat} legt Befehlscodierung fest
 	\item \underline{Befehlscodierung}: \code{[opcode] [parameter1] ...}
@@ -193,25 +193,25 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{Instruction Set -- MIPS-Prozessor}
+\paragraph{Instruction Set --- MIPS-Prozessor}
 \begin{items}
 	\item Alle Befehle 32 Bit lang
 	\item \underline{Befehlstypen}: 
 	\begin{enumeration}
 		\item \textbf{Typ R}: Register-Register-Befehle
-			\begin{figure}[ht]
+			\begin{figure}[H]
 			  \centering
 			  \includegraphics[width=0.33\textwidth]{MIPS-R}
 			  \label{MIPS-R}
 			\end{figure}
 		\item \textbf{Typ I}: Lade-/Speicher-Befehle
-			\begin{figure}[ht]
+			\begin{figure}[H]
 			  \centering
 			  \includegraphics[width=0.33\textwidth]{MIPS-I}
 			  \label{MIPS-I}
 			\end{figure}
 		\item \textbf{Typ J}: Sprungbefehle
-			\begin{figure}[ht]
+			\begin{figure}[H]
 			  \centering
 			  \includegraphics[width=0.33\textwidth]{MIPS-J}
 			  \label{MIPS-J}
@@ -232,7 +232,7 @@
 	\end{tabular}
 \end{items}
 
-\textbf{Adressierung -- Berechnung}
+\paragraph{Adressierung --- Berechnung}
 \begin{items}
 	\item \underline{Adressierungsarten}: Verschiedene Möglichkeiten, die Adresse eines Operanden/Sprungziels zu berechnen
 	\item \underline{Früher}: Adressen in Befehlen absolut vorgegeben $\leadsto$ Programme lageabhängig
@@ -240,7 +240,7 @@
 		Programmadresse $\leadsto$ logische Adresse $\leadsto$ physikalische Adresse
 \end{items}
 
-\textbf{Adressierungsarten}
+\paragraph{Adressierungsarten}
 \begin{enumeration}
 	\item \underline{Register-Adressierung}
 	\begin{enumeration}
@@ -267,30 +267,30 @@
 
 \newpage
 
-\textbf{Adressierungsarten -- Register-Adressierung}
+\paragraph{Adressierungsarten --- Register-Adressierung}
 \begin{items}
 	\item Operanad steht bereits im Register $\leadsto$ kein Speicherzugriff nötig
 	\item \underline{Implizite Adressierung}: Nummer des Registers ist im Opcode-Feld codiert enthalten \\* \textbf{Beispiel}: \code{LSRA} (Verschiebe Akkumulatorinhalt eine Bitposition nach rechts)
-		\begin{figure}[ht]
+		\begin{figure}[H]
 		  \centering
 		  \includegraphics[width=0.33\textwidth]{ImpliziteRegisterAdressierung}
 		  \label{ImpliziteRegisterAdressierung}
 		\end{figure}
 	\item \underline{Flag-Adressierung}: Spezialfall der impliziten Adressierung: Nur ein Bit (=Flag) wird im Register angesprochen \\* \textbf{Beispiel}: \code{SEI/CLI} (set/clear interrupt flag)
-		\begin{figure}[ht]
+		\begin{figure}[H]
 		  \centering
 		  \includegraphics[width=0.33\textwidth]{FlagAdressierung}
 		  \label{FlagAdressierung}
 		\end{figure}
 	\item \underline{Explizite Adressierung}: Registermnummer wird im Operandenfeld angegeben \\* \textbf{Beispiel}: \code{DEC R0} (Dekrementiere Register R0)
-		\begin{figure}[ht]
+		\begin{figure}[H]
 		  \centering
 		  \includegraphics[width=0.33\textwidth]{ExpliziteRegisterAdressierung}
 		  \label{ExpliziteRegisterAdressierung}
 		\end{figure}
 \end{items}
 
-\textbf{Adressierungsarten -- Einstufige Speicher-Adressierung}
+\paragraph{Adressierungsarten --- Einstufige Speicher-Adressierung}
 \begin{items}
 	\item Eine Adressberechnung ist zur Ermittlung der effektiven Adresse nötig $\leadsto$ keine mehrfachen Speicherzugriffe zur Adressermittlung
 	\item \underline{Unmittelbare Adressierung}: Befehl enthält nicht Adresse des Operanden, sondern Operand selbst (Opcode und Operand stehen hintereinander im Speicher) \\* \textbf{Beispiel}: \code{LDA #\$A3} (Lade Akkumulator mit Sedezimalwert \code{\$A3})
@@ -316,7 +316,7 @@
 		\item \textbf{Postinkrement}: Nach Befehlsausführung Registerinhalt inkrementieren und auf nächste Speicherzelle zeigen (z.B. \code{INC (R0)+}: Inkrementiere Speicherwortinhalt, das von \code{R0} adressiert wird, danach Inhalt von \code{R0})
 		\item \textbf{Predekrement}: Vor Befehlsausführung Registerinhalt erniedrigen und auf vorhergehende Speicherzelle zeigen (z.B. \code{CLR -(R0)}: Dekrementiere Inhalt von \code{R0}, lösche dann durch \code{R0} adressiertes Speicherwort)
 	\end{items}
-		\begin{figure}[ht]
+		\begin{figure}[H]
 		  \centering
 		  \includegraphics[width=0.33\textwidth]{RegisterIndirekteAdressierung}
 		  \label{RegisterIndirekteAdressierung}

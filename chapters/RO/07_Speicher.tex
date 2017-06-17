@@ -1,7 +1,7 @@
 \section{Speicher}
 \label{sec:speicher}
 
-\textbf{Begriffe}:
+\paragraph{Begriffe}
 \begin{items}
 	\item \underline{Hauptspeicher}: "`Gedächtnis"' des Rechners. Beinhaltet Programme und Daten, die jederzeit und sofort (\emph{random access}) zur Verfügung stehen müssen
 	\begin{figure}[H]\centering\label{Hauptspeicher-Struktur}\includegraphics[width=0.33\textwidth]{Hauptspeicher-Struktur}\end{figure}
@@ -28,26 +28,26 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{Speicherklassifizierung}:
+\paragraph{Speicherklassifizierung}
 \begin{figure}[H]\centering\label{Speicherklassifizierung}\includegraphics[width=0.33\textwidth]{Speicherklassifizierung}\end{figure}
 
 \newpage
 
-\textbf{Transistor (MOSFET)}:
+\paragraph{Transistor (MOSFET)}
 \begin{items}
 	\item Eine Spannung an einem \emph{Gate} regelt, ob Strom zwischen \emph{Source} und \emph{Drain} fließt.
 	\item \underline{n-MOS-MOSFET}: Kanal sperrt, wenn keine Spannung anliegt (\emph{selbstsperrend})
 \end{items}
 \begin{figure}[H]\centering\label{MOSFET}\includegraphics[width=0.33\textwidth]{MOSFET}\end{figure}
 
-\textbf{Speicherzelle -- statisch (SRAM)}:
+\paragraph{Speicherzelle --- statisch (SRAM)}
 \begin{items}
 	\item Aufgebaut aus zwei kreuzweise rückgekoppelten Invertern und zwei Transistoren zur Ankopplung an Bitleitungen \( \leadsto \) 6-Transistor-Zelle
 	\item \underline{Vorteile}: Strom fließt nur zum Umschaltzeitpunkt \( \leadsto \) kein Refresh nötig
 	\item \underline{Nachteile}: Hoher Platzverbrauch
 \end{items}
 
-\textbf{Speicherzelle -- dynamisch (DRAM)}:
+\paragraph{Speicherzelle --- dynamisch (DRAM)}
 \begin{items}
 	\item Aufgebaut aus einer Transistorzelle und einem Kondensator (vergößerte Drain-Zone, von Drain-Kontakt durch dünne Isolierschicht getrennt) \( \leadsto \) Platzverbrauch viermal kleiner als bei SRAM
 	\item \underline{Vorteile}: Geringer Platzverbrauch
@@ -69,16 +69,16 @@
 
 \newpage
 
-\textbf{DRAM -- Adressierung}
+\paragraph{DRAM --- Adressierung}
 \begin{figure}[H]\centering\label{DRAMAdressierung}\includegraphics[width=0.33\textwidth]{DRAMAdressierung}\end{figure}
 
-\textbf{DRAM -- Auffrischung}
+\paragraph{DRAM --- Auffrischung}
 \begin{items}
 	\item Zeilenweise, jede Zeile alle 2 msec
 	\item Nur Zeilenadresse wird an Baustein angelegt, RAS=0, CAS=1
 \end{items}
 
-\textbf{Zugriffsbeschleunigung -- Techniken}
+\paragraph{Zugriffsbeschleunigung --- Techniken}
 \begin{items}
 	\item \underline{Prinzip}: Übertragung von benachbarten Bytes (Blöcken) anstatt einzelnen Bytes \\*
 		\( \leadsto \) \textbf{beschleunigter Zugriff} auf Speicherbaustein, falls alle zu \\* \phantom{\( \leadsto \)} lesenden/schreibenden Speicherzellen in einer Zeile liegen \\*
@@ -86,7 +86,7 @@
 		\( \leadsto \) \textbf{erheblich beschleunigter Zugriff}
 \end{items}
 
-\textbf{FPM-DRAM}
+\paragraph{FPM-DRAM}
 \begin{items}
 	\item aufeinanderfolgende Speicherzugriffe oft in selber Zeile \\*
 		 \( \leadsto \) ausnutzen
@@ -97,7 +97,7 @@
 	\item \( \leadsto \) RAS-precharche-Zeit und RAS-CAS-Delay entfallen bei Folgezugriffen
 \end{items}
 
-\textbf{EDO-RAM}
+\paragraph{EDO-RAM}
 \begin{items}
 	\item = \emph{extended data output} RAM
 	\item Datenausgabe wird bei Lesen von CAS-Signal durch \textbf{interne Pufferung} entkoppelt
@@ -106,7 +106,7 @@
 	\item Prozessor kann Daten auslesen, während Speichersteuerung neue Spaltenadresse an DRAM übergibt
 \end{items}
 
-\textbf{SDRAM}
+\paragraph{SDRAM}
 \begin{items}
 	\item = \emph{synchrone dynamische} RAMs
 	\item beherrscht heute Speichermarkt
@@ -120,7 +120,7 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{DDR-SDRAM}
+\paragraph{DDR-SDRAM}
 \begin{items}
 	\item Nächste Stufe SDRAM (SRAM II)
 	\item Vier Speicherbänke, die parallel arbeiten
@@ -134,14 +134,14 @@
 
 \newpage
 
-\textbf{SLDRAM}
+\paragraph{SLDRAM}
 \begin{items}
 	\item = \emph{sync link} SDRAM
 	\item Weiterentwicklung SDRAM
 	\item Höhere erlaubte Busfrequenzen \( \leadsto \) höhere Leistung
 \end{items}
 
-\textbf{Organisation -- Hauptspeicher}
+\paragraph{Organisation --- Hauptspeicher}
 \begin{items}
 	\item lineare Liste von Speicherworten
 	\item \underline{Aufbau}: Speicherbausteine
@@ -150,7 +150,7 @@
 	\item Maximale Kapazität: Gegeben durch Breite des Adressbus
 \end{items}
 
-\textbf{Memory Map}
+\paragraph{Memory Map}
 \begin{items}
 	\item = Speicher-Belegungsplan
 	\item Gibt an, welche Speicherbausteine auf welchen Bereichen des Hauptspeichers liegen

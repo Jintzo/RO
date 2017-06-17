@@ -1,41 +1,42 @@
 \section{Pipeline-Verarbeitung}
 \label{sec:pipelining}
 
-\textbf{Pipeline vs Seriell}
+\paragraph{Pipeline vs Seriell}
 \begin{items}
   \item Seriell:
-  \begin{figure}[ht]
+  \begin{figure}[H]
     \centering
     \includegraphics[width=0.33\textwidth]{Seriell}
     \label{Seriell}
   \end{figure}
   \item Pipelining:
-  \begin{figure}[ht]
+  \begin{figure}[H]
     \centering
     \includegraphics[width=0.33\textwidth]{Pipeline}
     \label{Pipeline}
   \end{figure}
 \end{items}
 
-\textbf{Beispiel: Wäsche waschen}
+\paragraph{Beispiel: Wäsche waschen}
 \begin{enumeration}
   \item Schmutzige Wäsche in Waschmaschine
   \item Nasse Wäsche in Trockner
   \item Falten/Bügeln
   \item Kleider in Schrank legen
 \end{enumeration}
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \label{PipelineWaesche}
   \includegraphics[width=0.33\textwidth]{PipelineWaesche}
 \end{figure}
 
-\textbf{Definition} \emph{Pipelining}: Operationszerlegung in mehrere Phasen/Suboperationen, die von hintereinandergeschalteten Verarbeitungseinheiten taktsynchron bearbeitet werden (jede Verarbeitungseinheit führt eine Teiloperation aus). \\*
-$\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
+\paragraph{Definition Pipelining}
+\begin{items}
+  \item Operationszerlegung in mehrere Phasen/Suboperationen, die von hintereinandergeschalteten Verarbeitungseinheiten taktsynchron bearbeitet werden (jede Verarbeitungseinheit führt eine Teiloperation aus)
+  \item \( \leadsto \) Gesamtheit Verarbeitungseinheiten = Pipeline
+\end{items}
 
-\ \\
-
-\textbf{Begrifflichkeiten}
+\paragraph{Begrifflichkeiten}
 \begin{items}
   \item \underline{Stufen, Register}:
   \begin{figure}[H]
@@ -59,7 +60,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
 
 \newpage
 
-\textbf{MIPS  -- Befehlsabarbeitung}
+\paragraph{MIPS  --- Befehlsabarbeitung}
 \begin{items}
   \item \textbf{Befehl holen}: Wird bei jedem Befehlstyp benötigt
   \begin{enumeration}
@@ -87,7 +88,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
   \begin{figure}[H]\centering\label{MIPS-Datenpfad}\includegraphics[width=0.5\textwidth]{MIPS-Datenpfad}\end{figure}
 \end{items}
 
-\textbf{MIPS -- Pipelining: DLX-Pipeline} (DLX = deluxe)
+\paragraph{MIPS --- Pipelining: DLX-Pipeline} (DLX = deluxe)
 \begin{items}
   \item \textbf{Pipelinestufen, Buffering} (siehe Grafik "`Begrifflichkeiten: Stufen, Register"')
   \begin{figure}[H]\centering\label{MIPS-Buffering}\includegraphics[width=0.5\textwidth]{MIPS-Buffering}\end{figure}
@@ -102,7 +103,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
 
 \newpage
 
-\textbf{MIPS -- Pipeline-Konflikte}
+\paragraph{MIPS --- Pipeline-Konflikte}
 \begin{items}
   \item \underline{Datenkonflikte}: Benötiger Operand ist in der Pipeline (noch) nicht verfügbar (Datenabhängigkeiten im Befehlsstrom)
   \item \underline{Struktur-/Ressourcenkonflikte}: Zwei Pipeline-Stufen benötigen selbe Ressource, aber nur einfacher Zugriff möglich
@@ -113,7 +114,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
   \end{enumeration}
 \end{items}
 
-\textbf{Datenabhängigkeiten/-konflikte}
+\paragraph{Datenabhängigkeiten/-konflikte}
 \begin{items}
   \item \underline{Datenabhängigkeit}: Zwischen zwei aufeinanderfolgenden Befehlen \( Inst_1, Inst_2 \) kann eine \emph{Datenabhängigkeit} bestehen:
   \begin{enumeration}
@@ -160,7 +161,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
   \end{enumeration}
 \end{items}
 
-\textbf{Ressourcenkonflikte}
+\paragraph{Ressourcenkonflikte}
 \begin{items}
   \item Treten bei einfachen Modellen wie einer DLX-Pipeline nicht auf
   \item \underline{Lösungen}:
@@ -173,7 +174,7 @@ $\leadsto$ Gesamtheit Verarbeitungseinheiten = Pipeline
 
 \newpage
 
-\textbf{Steuerflusskonflikte}
+\paragraph{Steuerflusskonflikte}
 \begin{items}
   \item \underline{Programmsteuerbefehle}: bedingte und unbedingte Sprünge, Unterprogrammaufruf- und -rückkehrbefehle, Unterbrechungsbefehle
   \item Befehlszähler wird erst in \code{MEM}-Stufe ersetzt \( \leadsto \) Befehle in Pipeline, die wieder gelöscht werden müssen

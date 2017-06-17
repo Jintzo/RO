@@ -1,6 +1,6 @@
 \section{Virtuelle Speicherverwaltung}
 
-\textbf{Notwendigkeit}
+\paragraph{Notwendigkeit}
 \begin{items}
   \item Immer größere Programme
   \item Immer mehr Programme "`gleichzeitig"'
@@ -9,7 +9,7 @@
   \item \underline{Umsetzung}: \textbf{MMU} (\emph{memory management unit}) setzt virtuelle Adressen in physikalische um
 \end{items}
 
-\textbf{Virtueller Speicher}
+\paragraph{Virtueller Speicher}
 \begin{items}
   \item Speicherkapazität größer als effektive Hauptspeicherkapazität
   \item Betriebssystem lagert nach Bedarf Speicherbereiche ein/aus
@@ -18,7 +18,7 @@
   \item \( \leadsto \) Abbildungsinformation für zusammenhängende Adressbereiche, um Übersetzungstabellen klein zu halten
 \end{items}
 
-\textbf{Virtueller Speicher -- Verwaltung (Segmentierung)}
+\paragraph{Virtueller Speicher --- Verwaltung (Segmentierung)}
 \begin{items}
   \item Virtueller Adressraum wird in Segmente verschiedener Länge zerteilt
   \item Mehrere Segmente pro Programm (zB für Programmcode, Daten)
@@ -31,7 +31,7 @@
     - Programm aus nur einem Code- und Datensegment \\* \phantom{-} \( \leadsto \) muss vollständig eingelagert werden
 \end{items}
 
-\textbf{Virtueller Speicher -- Verwaltung (Seiten)}
+\paragraph{Virtueller Speicher --- Verwaltung (Seiten)}
 \begin{items}
   \item logischer und physikalischer Adressraum in Teile fester länge (Pages) zerteilt
   \item Pages relativ klein (256-4k Byte)
@@ -43,7 +43,7 @@
     - häufigerer Datentransfer als bei Segmentierung
 \end{items}
 
-\textbf{Segmentbasierte Speicherverwaltung -- Implementierung}
+\paragraph{Segmentbasierte Speicherverwaltung --- Implementierung}
 \begin{items}
   \item virtuelle Adresse wird in \textbf{Segmentnummer} (\( n \) höherwertigste Bits der virtuellen Adresse) als Segmentkennung und in \textbf{Bytenummer} (verbleibende \( m \) Bits der virtuellen Adresse) als Abstand zum Segmentanfang unterteilt
   \item max. virtuelle Segmentanzahl \( 2^n \), max. Segmentgröße \( 2^m \)
@@ -61,21 +61,21 @@
 
 \newpage
 
-\textbf{Virtuelle Speicherverwaltung -- Probleme}
+\paragraph{Virtuelle Speicherverwaltung --- Probleme}
 \begin{items}
   \item \underline{Einlagerungszeitpunkt}: Wann werden Segmente/Seiten in Hauptspeicher eingelagert?
   \item \underline{Zuweisungsproblem}: Wo in Hauptspeicher werden Seiten/Segmente eingelagert?
   \item \underline{Ersetzungsproblem}: Welche Segmente/Seiten auslagern um Platz für neu benötigte Daten zu schaffen?
 \end{items}
 
-\textbf{Probleme -- Einlagerungszeitpunkt}
+\paragraph{Probleme --- Einlagerungszeitpunkt}
 \begin{items}
   \item \underline{Gängiges Verwahren}: Einlagerung auf Anforderung (\emph{demand paging} bei Seitenverfahren)
   \item Daten werden eingelagert, sobald auf sie zugegriffen wird, aber nicht in Hauptspeicher liegen
   \item \underline{Segment-/Seitenfehler} (\emph{segment/page fault}): Zugriff auf nicht in Hauptspeicher vorhandene(s) Segment/Seite
 \end{items}
 
-\textbf{Probleme -- Zuweisungsproblem (Segmentierung)}
+\paragraph{Probleme --- Zuweisungsproblem (Segmentierung)}
 \begin{items}
   \item ausreichend große Lücke in Hauptspeicher muss gefunden werden
   \item Strategien:
@@ -89,7 +89,7 @@
   \item unbelegte Speicherbereiche oft zu klein um weitere Segmente aufnehmen zu können
 \end{items}
 
-\textbf{Probleme -- Zuweisungsproblem (Seiten)}
+\paragraph{Probleme --- Zuweisungsproblem (Seiten)}
 \begin{items}
   \item Problem taucht nicht auf, da alle Seiten gleich groß \\*
     \( \leadsto \) es entstehen immer passende Lücken \\*
@@ -97,13 +97,13 @@
   \item \underline{Interne Fragmentierung}: Einheitliche Seitengröße \( \leadsto \) auf letzter Seite des Programm-Moduls wahrscheinlich ungenutzter Leerraum
 \end{items}
 
-\textbf{Probleme -- Ersetzungsproblem (Segmentierung)}
+\paragraph{Probleme --- Ersetzungsproblem (Segmentierung)}
 \begin{items}
   \item Limitierung der Anzahl gleichzeitig von einem Prozess benutzbaren Segmente
   \item \( \leadsto \) bei Einlagerung eines neuen Segments wird anderes Segment des Prozesses ausgelagert
 \end{items}
 
-\textbf{Probleme -- Ersetzungsproblem (Seiten)}
+\paragraph{Probleme --- Ersetzungsproblem (Seiten)}
 \begin{items}
   \item Seitenersetzungsstrategien:
   \begin{enumeration}
@@ -115,7 +115,7 @@
   \end{enumeration}
 \end{items}
 
-\textbf{Virtueller vs. physikalischer Cache}
+\paragraph{Virtueller vs. physikalischer Cache}
 \begin{items}
   \item \underline{virtueller Cache}: zwischen CPU und MMU, Tags = höherwertigste Bits der logischen Adressen
   \item Vorteile: \\*
@@ -127,7 +127,7 @@
 
 \newpage
 
-\textbf{Segmentorientierte Speicherverwaltung -- Beispiel x86}
+\paragraph{Segmentorientierte Speicherverwaltung --- Beispiel x86}
 \begin{items}
   \item \underline{Segment-Deskriptor}: beschreibt sein Segment durch Attribute: \\*
     - \textbf{Segment-Basisadresse} (\emph{base address}) \\*
@@ -144,7 +144,7 @@
   \item \textbf{Arbeitsmenge} (\emph{working set}): durch Segmentregister spezifizierte Segmente eines Prozesses
 \end{items}
 
-\textbf{Adressierungsmodi -- Beispiel x86}
+\paragraph{Adressierungsmodi --- Beispiel x86}
 \begin{items}
   \item Verschiedene Adressierungsmodi möglich (für Kompatibilität)
   \item \underline{Real (Address) Mode} (Kompatibilitätsmode zu 8086): \\*
@@ -159,26 +159,26 @@
     - existiert zur Kompatibilität mit 80386
 \end{items}
 
-\textbf{Fehlererkennung}
+\paragraph{Fehlererkennung}
 \begin{items}
   \item \underline{Segmentfehler}: Bit in Segment-Deskriptor zeigt, ob Segment in Hauptspeicher ist oder nicht
   \item \underline{Seitenfehler}: Seite/Seitentabelle befindet sich nicht in Hauptspeicher \( \leadsto \) spezielles Kennungsbit in Seitentabellen-Verzeichnis
 \end{items}
 
-\textbf{Beschleunigung der Adressberechnung}
+\paragraph{Beschleunigung der Adressberechnung}
 \begin{items}
   \item schneller, vollassoziativer Cache (\emph{translation lookaside buffer}, TBL) speichert automatisch zuletzt benutzte Einträge aus Seitentabellenverzeichnis und Seitentabelle \\*
   \( \leadsto \) im Trefferfall (ca. 90\%) muss \textbf{nicht} auf im Hauptspeicher liegende Seitentabelle zugegriffen werden
 \end{items}
 
-\textbf{Schutzmechanismen}
+\paragraph{Schutzmechanismen}
 \begin{items}
   \item Schutz vor unerlaubten Speicherzugriffen: \\*
     - Trennung von Systemsoftware von Anwendungsprozessen \\*
     - Trennung der Anwendungsprozesse voneinander
 \end{items}
 
-\textbf{Schutzebenen}
+\paragraph{Schutzebenen}
 \begin{items}
   \item = \emph{privilege level} (PL)
   \item wichtiges Mittel zur Realisierung von Schutzmechanismen
@@ -193,7 +193,7 @@
   \end{enumeration}
 \end{items}
 
-\textbf{Zugriffsschutz -- Regeln}
+\paragraph{Zugriffsschutz --- Regeln}
 \begin{items}
   \item Prozess darf nur auf Daten zugreifen, die höchstens so vertrauenswürdig sind wie er selbst
   \item Prozess darf nur Code benutzen, der mindestens so vertrauenswürdig ist wie er selbst

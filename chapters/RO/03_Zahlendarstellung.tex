@@ -1,25 +1,25 @@
 \section{Zahlendarstellung}
 \label{sec:zahlendarstellung}
 
-\textbf{Zahlensysteme -- Stellenwertsystem}
+\paragraph{Zahlensysteme --- Stellenwertsystem}
 \begin{items}
 	\item Darstellung einer Zahl durch Ziffern $z_i$ -- Stellenwert $i$te Position: $i$te Potenz der Basis $b$
 	\item Wert $X_b = \sum _{i=-m}^n z_ib^i$
 	\item Wichtige Zahlensysteme: Dual-, Oktal-, Dezimal-, Hexadezimalsystem
 \end{items}
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.33\textwidth]{Zahlensysteme}
-  \label{Zahlensysteme}
+ \label{Zahlensysteme}
 \end{figure}
 
-\textbf{Umwandlung von Dezimal zu Basis $b$}
+\paragraph{Umwandlung von Dezimal zu Basis $b$}
 \begin{enumeration}
 	\item \underline{euklidischer Algorithmus}:
 	\begin{enumeration}
 		\item Berechne $p$ mit $b^p \leq Z < b^{p+1}$, setze $i=p$
 		\item Berechne $y_i=Z_i \text{ div } b^i$, $R_i = Z_i \text{ mod } b^i$
-		\item Wiederhole (b)H für $i= p-1,\dots$, ersetze dabei $Z$ durch $R_i$, bis $R_i=0$ oder $b^i$ klein genug ist
+		\item Wiederhole (b)H für $i = p - 1, \dots $, ersetze dabei $Z$ durch $R_i$, bis $R_i=0$ oder $b^i$ klein genug ist
 	\end{enumeration}
 	\begin{align*}
 		2^3 \leq \ &13 < 2^4 \\
@@ -51,7 +51,7 @@
 	 \end{enumeration} 
 \end{enumeration}
 
-\textbf{Umwandlung Basis $b$ zu Dezimal}
+\paragraph{Umwandlung Basis $b$ zu Dezimal}
 \begin{items}
 	\item Einzelne Stellen nach Stellenwertgleichung addieren
 	\begin{multline*}
@@ -59,7 +59,7 @@
 	\end{multline*}
 \end{items}
 
-\textbf{Umwandlung Basis $b_1$ zu Basis $b_2$}
+\paragraph{Umwandlung Basis $b_1$ zu Basis $b_2$}
 \begin{enumeration}
 	\item Umwandlung über Dezimalsystem
 	\item Ist eine Basis Potenz der anderen, so können mehrere Stellen zu einer Ziffer zusammengefasst werden
@@ -70,7 +70,7 @@
 
 \newpage
 
-\textbf{Darstellung negativer Zahlen}
+\paragraph{Darstellung negativer Zahlen}
 \begin{enumeration}
 	\item \underline{Betrag und Vorzeichen}: Erstes Bit von Links ist Vorzeichen, Rest ist Betrag (\code{0001 \ 0010 = 18, 1001 \ 0010 = -18})
 	\begin{items}
@@ -107,7 +107,7 @@
 	\item \underline{Exzess-Darstellung}: Verschiebung nach oben derart, dass kleinste negative Zahl die Darstellung \code{0...0} hat
 \end{enumeration}
 
-\textbf{Darstellung von Kommazahlen}
+\paragraph{Darstellung von Kommazahlen}
 \begin{enumeration}
 	\item \underline{Festkommazahlen}: Komma sitzt an einer festen Stelle
 
@@ -116,7 +116,7 @@
 		\item $X = (-1)^{\text{Vorzeichen}}*(0,\text{Mantisse})*b^{\text{Exponent}}$
 		\item $\text{Exponent} = \text{Charakteristik}-b^{(y-1)-x}$
 	\end{items}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 	  \centering
 	  \includegraphics[width=0.33\textwidth]{Gleitkommazahl}
 	  \label{Gleitkommazahl}
@@ -125,13 +125,13 @@
 	\item \underline{IEEE-Standard}:
 	\begin{enumeration}
 		\item 32-Bit:
-			\begin{figure}[ht]
+			\begin{figure}[H]
 			  \centering
 			  \includegraphics[width=0.33\textwidth]{IEEE-32bit}
 			  \label{IEEE-32bit}
 			\end{figure}
 		\item 64-Bit:
-			\begin{figure}[ht]
+			\begin{figure}[H]
 			  \centering
 			  \includegraphics[width=0.33\textwidth]{IEEE-64bit}
 			  \label{IEEE-64bit}
@@ -139,7 +139,7 @@
 	\end{enumeration}
 \end{enumeration}
 
-\textbf{Codierungen}
+\paragraph{Codierungen}
 \begin{enumeration}
 	\item \underline{BCD}: Dezimalzahl ziffernweise als Binärzahl (=\emph{Tetrade}) codieren:
 	\begin{center}

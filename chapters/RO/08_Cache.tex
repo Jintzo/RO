@@ -1,6 +1,6 @@
 \section{Cache-Speicher}
 
-\textbf{Hintergrund}
+\paragraph{Hintergrund}
 \begin{items}
 	\item Lücke zwischen Verarbeitungs- (CPU) und Zugriffsgeschwindigkeit (DRAM) immer größer
 	\item \underline{Lösung}: Hierarchische Anordnung verschiedener Speicher \\*
@@ -17,7 +17,7 @@
 
 \newpage
 
-\textbf{CPU-Cache}
+\paragraph{CPU-Cache}
 \begin{items}
 	\item kleiner, schneller Pufferspeicher
 	\item speichert \emph{Kopien} von Hauptspeicherteilen, auf die mit hoher Wahrscheinlichkeit als nächstes zugegriffen wird
@@ -30,7 +30,7 @@
 	\item Daten werden aus Cache verdrängt, wenn sie nicht mehr benötigt werden
 \end{items}
 
-\textbf{Cache -- Funktionsweise}
+\paragraph{Cache --- Funktionsweise}
 \begin{items}
 	\item \underline{Lesezugriff}: \( \mu \)P überprüft davor ob Datum in Cache steht \\*
 		- \textbf{read hit}: Datum wird ohne Wartezyklen aus Cache geladen \\*
@@ -40,20 +40,20 @@
 		- \textbf{write hit}: verschiedene Verfahren möglich
 \end{items}
 
-\textbf{Schreibzugriff -- Durchschreibverfahren}
+\paragraph{Schreibzugriff --- Durchschreibverfahren}
 \begin{items}
 	\item Datum wird von CPU immer gleichzeitig in Cache- und Arbeitsspeicher geschrieben
 	\item \underline{Vorteil}: Konsistenzgarantie zwischen Cache und DRAM
 	\item \underline{Nachteil}: Schreibzugriffe benötigen immer langsame Zykluszeit von Hauptspeicher, belasten Systembus
 \end{items}
 
-\textbf{Schreibzugriff -- gepuffertes Durchschreibverfahren}
+\paragraph{Schreibzugriff --- gepuffertes Durchschreibverfahren}
 \begin{items}
 	\item Verwendung von \emph{Schreib-Puffer}, der zu schreibende Daten temporär aufnimmt
 	\item Daten werden dann automatisch von Cache-Controller in Hauptspeicher übertragen
 \end{items}
 
-\textbf{Schreibzugriff -- Rückschreibverfahren}
+\paragraph{Schreibzugriff --- Rückschreibverfahren}
 \begin{items}
 	\item Datum wird von CPU nur in Cachespeicher geschrieben und durch spezielles Bit (\emph{dirty bit}) gekennzeichnet
 	\item Arbeitsspeicher wird nur geändert, wenn \emph{dirty}-Datum aus Cache verdrängt wird
@@ -61,21 +61,21 @@
 	\item \underline{Nachteil}: Konsistenzprobleme zwischen Cache- und Hauptspeicher
 \end{items}
 
-\textbf{Konsistenzprobleme}
+\paragraph{Konsistenzprobleme}
 \begin{items}
 	\item Andere Systemkomponenten (z.B. DMA-Controller) finden ggf "`veraltete Daten"' in DRAM vor, die von CPU längst geändert wurden
 	\item Andere Systemkomponenten können Daten in Hauptspeicher ändern, während CPU noch mit alten Daten aus Cache arbeitet
 	\item \( \leadsto \) aufwendige Verfahren bei Cache-Steuerung zur Inkonsistenzvermeidung erforderlich
 \end{items}
 
-\textbf{Begriffe}
+\paragraph{Begriffe}
 \begin{items}
 	\item \underline{Hit-Rate}: = Anzahl Treffer pro Anzahl Zugriffe
 	\item \underline{Mittlere Zugriffszeit}: \\*
 		\( t_{\text{access}} = (\text{Hit-Rate})t_\text{hit}+(1-\text{Hit-Rate})t_\text{miss} \)
 \end{items}
 
-\textbf{Cache-Speicher -- Aufbau}
+\paragraph{Cache-Speicher --- Aufbau}
 \begin{items}
 	\item Besteht aus drei Teilen:
 	\begin{enumeration}
@@ -87,7 +87,7 @@
 	\item \underline{Komparator}: ermittelt, ob zu Adressbus gehörendes Datum in Cache abgelegt ist
 \end{items}
 
-\textbf{Cache-Speicher -- Organisation}
+\paragraph{Cache-Speicher --- Organisation}
 \begin{items}
 	\item \underline{Problem}: Wie feststellen, ob Daten im Cache sind? Wie können diese gefunden werden?
 	\item Techniken für Adressvergleich:
@@ -98,7 +98,7 @@
 	\end{enumeration}
 \end{items}
 
-\textbf{Cache-Speicher -- voll-assoziativer Cache}
+\paragraph{Cache-Speicher --- voll-assoziativer Cache}
 \begin{items}
 	\item Gesamter Hauptspeicher wird auf gesamten Cache abgebildet
 	\item \( \leadsto \) Jeder aus dem Hauptspeicher gecachte Wert kann an jeder Stelle im Cache stehen
@@ -112,7 +112,7 @@
 \end{items}
 \begin{figure}[H]\centering\label{VollAssoziativerCache}\includegraphics[width=0.2\textwidth]{VollAssoziativerCache}\end{figure}
 
-\textbf{Cache-Speicher -- direct mapped-Cache}
+\paragraph{Cache-Speicher --- direct mapped-Cache}
 \begin{items}
 	\item jede Hauptspeicherstelle erhält eindeutigen, festen Cacheplatz
 	\item \underline{Vorteile}: \\*
@@ -125,7 +125,7 @@
 \end{items}
 \begin{figure}[H]\centering\label{DirectMappedCache}\includegraphics[width=0.2\textwidth]{DirectMappedCache}\end{figure}
 
-\textbf{Cache-Speicher -- N-way set associative-Cache}
+\paragraph{Cache-Speicher --- N-way set associative-Cache}
 \begin{items}
 	\item Mehrere Cache-Zeilen (z.B. 2) werden zu Sets zusammengefasst
 	\item Kompromiss zwischen direct mapped- und vollassoziativem Cache
@@ -136,14 +136,14 @@
 		- \textbf{zufällig}
 \end{items}
 
-\textbf{Cache-Speicher -- Ersetzungsstrategien}
+\paragraph{Cache-Speicher --- Ersetzungsstrategien}
 \begin{items}
 	\item gibt an, welcher Cachespeicherteil nach cache miss durch neu geladene Speicheroption überschrieben werden soll
 	\item ist nur bei voll/n-fach-satzassoziativer Cachespeicherorganisation nötig
 	\item \underline{LRU} (\emph{last recently used}): am längsten nicht benutzte Speicherportion wird ersetzt (schwer in HW umzusetzen, deswegen meist nur Pseudo-LRU)
 \end{items}
 
-\textbf{Ursachen für Fehlzugriffe}
+\paragraph{Ursachen für Fehlzugriffe}
 \begin{items}
 	\item \underline{Erstzugriff} (\emph{compulsory}): Bei Erstzugriff auf Cache-Block ist dieser noch nicht im Cache und muss geladen werden \\*
 	- Kaltstartfehlzugriffe (\emph{cold start misses}) \\*
@@ -154,13 +154,13 @@
 	- Interferenzfehlzugriffe (\emph{interference misses})
 \end{items}
 
-\textbf{Trefferquotenmaximierung}
+\paragraph{Trefferquotenmaximierung}
 \begin{items}
 	\item \underline{Sehr kleine Cachespeicher} (32-128 Einträge): Voll-assoziativ
 	\item \underline{Größere Cachespeicher}: Trend zu Direct Mapped oder 2-8-fach-assoziativ
 \end{items}
 
-\textbf{Systembusanbindung}
+\paragraph{Systembusanbindung}
 \begin{items}
 	\item \underline{Cache-Controller}: Tag-RAM, Steuerung, Tag-Komparator \\*
 		- muss sehr schnell sein \( \leadsto \) auf Chip integriert \\*
@@ -169,7 +169,7 @@
 	\item \underline{Cachespeicher}: separat aus SRAM-Bausteinen aufgebaut
 \end{items}
 
-\textbf{Cache -- Hierarchien}
+\paragraph{Cache --- Hierarchien}
 \begin{items}
 	\item \underline{First-Level Cache} (\emph{on-chip cache}): Auf Prozessor-Chip \\*
 		- oft in \textbf{Befehlscache} und \textbf{Datencache} unterteilt
@@ -178,19 +178,19 @@
 \end{items}
 \begin{figure}[H]\centering\label{CacheHierarchie}\includegraphics[width=0.33\textwidth]{CacheHierarchie}\end{figure}
 
-\textbf{Cache -- Kohärenzproblem}
+\paragraph{Cache --- Kohärenzproblem}
 \begin{items}
 	\item \underline{Kohärenz}: korrektes Voranschreiten des Systemzustands durch abgestimmtes Zusammenwirken der Einzelzustände
 	\item \underline{Konsistenz}: alle Kopien eines Hauptspeicherdatums in verschiedenen Cachespeichern identisch \\* \( \leadsto \) \textbf{Kohärenz-Sicherstellung}
 \end{items}
 
-\textbf{Bus-Schnüffeln (Snooping)}
+\paragraph{Bus-Schnüffeln (Snooping)}
 \begin{items}
 	\item verwendet bei Mehrprozessorsystemen mit lokalem Cache pro Prozessor und gemeinsamen Hauptspeicher
 	\item \underline{Schnüffel-Logik}: jeder Prozessor hört an Bus mit, wenn andere Prozessoren Adressen auf Bus legen \\* \( \leadsto \) Vergleich mit den im lokalen Cache gespeicherten Daten
 \end{items}
 
-\textbf{Snooping -- Verfahren}
+\paragraph{Snooping --- Verfahren}
 \begin{items}
 	\item \underline{Schreibzugriff} auf dieselbe Adresse: \\*
 		- Cache-Block für ungültig erklären (\emph{write-invalidate}) \\*
