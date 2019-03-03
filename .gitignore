@@ -1,3 +1,6 @@
+## Summary, no bib needed
+*.bib
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
